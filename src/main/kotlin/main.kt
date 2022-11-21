@@ -1,24 +1,25 @@
-fun countXO(str: String): Boolean {
-    val strLower = str.lowercase()
-
-    var i = 0
-    var countX = 0
-    var countO = 0
-
-    while (i < strLower.length) {
-        if (strLower[i] == 'x') {
-            countX++
-        } else if (strLower[i] == 'o') {
-            countO++
-        }
-        i++
+fun portaria(idade: Int, tpConvite: String, cod: String): String {
+    if (idade < 18) {
+        return "Negado."
     }
 
-    return countO == countX && countO != 0
-}
+    if (tpConvite != "") {
+        val tipoConvite = tpConvite.lowercase()
 
-fun main() {
-    println(countXO("xxoo"))
-    println(countXO("xxooo"))
-    println(countXO("aa"))
+        if (tipoConvite != "comum" && tipoConvite != "premium" && tipoConvite != "luxo") {
+            return "Negado."
+        }
+
+        if (cod != "") {
+            val codigo = cod.lowercase()
+            return if (tipoConvite == "comum" && codigo.startsWith("xt")) {
+                "Welcome."
+            } else if ((tipoConvite == "premium" || tipoConvite == "luxo") && codigo.startsWith("xl")) {
+                "Welcome."
+            } else {
+                "Negado."
+            }
+        }
+    }
+    return "Negado."
 }
